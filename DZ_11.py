@@ -1,5 +1,6 @@
 from collections import UserDict
 from datetime import datetime
+import re
 
 
 class AddressBook(UserDict):
@@ -100,7 +101,8 @@ class Phone(Field):
 
     @staticmethod
     def validate_phone(value):
-        return True
+        pattern = r"^\+\d{1,3}\d{9}$"
+        return re.match(pattern, value) is not None
 
 
 class Birthday(Field):
@@ -113,4 +115,5 @@ class Birthday(Field):
 
     @staticmethod
     def validate_birthday(value):
-        return True
+        pattern = r"^\d{2}\.\d{2}\.\d{4}$"
+        return re.match(pattern, value) is not None
